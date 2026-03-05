@@ -250,6 +250,14 @@
         margin: 0 0 14px;
       }
 
+      .notifyBlock {
+        width: 100%;
+      }
+
+      .heroTop {
+        width: 100%;
+      }
+
       .heroSpacer {
         height: clamp(48px, 12vw, 150px);
       }
@@ -393,8 +401,19 @@
           justify-content: space-between;
         }
 
+        .heroTop {
+          min-height: 46svh;
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
+        }
+
         .heroSpacer {
-          height: clamp(24px, 8vw, 44px);
+          height: clamp(16px, 5vw, 28px);
+        }
+
+        .notifyBlock {
+          margin-top: 0;
         }
 
         .qaGrid {
@@ -446,31 +465,40 @@
         <div class="container">
           <div class="body">
             <div class="heroCard">
-              <h1 class="kicker">PİYASALARI TAKİP ETMENİN EN KOLAY YOLU</h1>
-              <p class="sub">Döviz, altın, kripto ve borsa tek ekranda.</p>
-              <p class="sub">Anlık, sade ve net.</p>
-              <div class="coming">YAKINDA</div>
+              <div class="heroTop">
+                <h1 class="kicker">PİYASALARI TAKİP ETMENİN EN KOLAY YOLU</h1>
+                <p class="sub">Döviz, altın, kripto ve borsa tek ekranda. </br>
+                Anlık, sade ve net.</p>
+                <div class="coming">YAKINDA</div>
 
-              <div class="heroSpacer"></div>
+                <div class="heroSpacer"></div>
+              </div>
 
-              <div class="notify">Gelişmelerden haberdar olun:</div>
+              <div class="notifyBlock">
+                <div class="notify">Gelişmelerden haberdar olun:</div>
 
-              <form class="emailWrap" action="#" method="post">
-                <input
-                  class="emailInput rounded-md"
-                  type="email"
-                  name="email"
-                  placeholder="E-posta adresinizi girin"
-                  autocomplete="email"
-                />
-                <button
-                  class="btn rounded sendBtn"
-                  type="submit"
-                  aria-label="Gönder"
-                >
-                  <img src="img/send.svg" width="33" height="35" alt="Gönder" />
-                </button>
-              </form>
+                <form class="emailWrap" action="#" method="post">
+                  <input
+                    class="emailInput rounded-md"
+                    type="email"
+                    name="email"
+                    placeholder="E-posta adresinizi girin"
+                    autocomplete="email"
+                  />
+                  <button
+                    class="btn rounded sendBtn"
+                    type="submit"
+                    aria-label="Gönder"
+                  >
+                    <img
+                      src="img/send.svg"
+                      width="33"
+                      height="35"
+                      alt="Gönder"
+                    />
+                  </button>
+                </form>
+              </div>
             </div>
           </div>
         </div>
@@ -575,7 +603,6 @@
             <p class="qaItem">kripto analiz</p>
             <p class="qaItem">bitcoin en yüksek kaç dolar oldu</p>
             <p class="qaItem">bitcoin en düşük kaç dolar oldu</p>
-            <p class="qaItem">kripto para yatırım için uygun mu</p>
           </div>
 
           <div class="qaCol">
