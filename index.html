@@ -1,839 +1,631 @@
 <!doctype html>
 <html lang="tr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Piyasal - Yakında</title>
 
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Piyasal - Yakında</title>
+    <!-- Poppins font load -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,500;0,600;0,700;1,300&display=swap"
+      rel="stylesheet"
+    />
 
-  <!-- Poppins font load -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,500;0,600;0,700;1,300&display=swap"
-    rel="stylesheet" />
+    <style>
+      :root {
+        --text: #183051;
+        --footerText: #bbc2c9;
+        --btn1: #70aadd;
+        --btn2: #ceeafb;
 
-  <style>
-    :root {
-      --text: #183051;
-      --footerText: #bbc2c9;
-      --btn1: #70aadd;
-      --btn2: #ceeafb;
-
-      --containerMax: 1100px;
-      --radius: 999px;
-      /* yuvarlak/oval */
-      --radius-md: 40px;
-      /* input gibi yuvarlak */
-      --headerwd: 70px;
-    }
-
-    * {
-      box-sizing: border-box;
-    }
-
-    html,
-    body {
-      height: 100%;
-    }
-
-    body {
-      margin: 0;
-      font-family: "Poppins", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-      color: var(--text);
-      min-height: 100svh;
-
-      /*
-      background-image: url("img/bg.png");
-      background-size: cover;
-      background-position: center;
-      background-repeat: no-repeat;
-
-      background-color: #f6f8fb;
-    */
-
-      background-color: #e8e9ea;
-    }
-
-    /* standart container margin */
-    .container {
-      max-width: var(--containerMax);
-      margin: 0 auto;
-      padding: 0 clamp(16px, 4vw, 24px);
-
-      display: flex;
-      flex-direction: column;
-    }
-
-    /* ortak yuvarlak class */
-    .rounded {
-      border-radius: var(--radius);
-    }
-
-    .rounded-md {
-      border-radius: var(--radius-md);
-    }
-
-    /* button ortak */
-    .btn {
-      border: 0;
-      cursor: pointer;
-      background: linear-gradient(135deg, var(--btn1), var(--btn2));
-      color: var(--text);
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-      padding: 10px 16px;
-      box-shadow: 0 10px 30px rgba(17, 38, 62, 0.12);
-      transition: transform 150ms ease, box-shadow 150ms ease;
-      font-weight: 600;
-    }
-
-    /* HEADER */
-    .header {
-      min-height: var(--headerwd);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding-top: 14px;
-      gap: 12px;
-      /* görselde biraz aşağıda gibi */
-    }
-
-    .logo {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .logo img {
-      width: auto;
-      height: clamp(48px, 9vw, 70px);
-      /* istenen */
-      max-width: 413px;
-      /* istenen svg ölçüsü */
-      display: block;
-    }
-
-    .contact {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      text-decoration: none;
-      color: var(--text);
-    }
-
-    .contact .pill {
-      position: relative;
-      padding: 10px 16px;
-      padding-right: 60px;
-      min-width: max-content;
-      background: rgba(255, 255, 255, 0.65);
-      backdrop-filter: blur(8px);
-      border: 1px solid rgba(255, 255, 255, 0.55);
-      box-shadow: 0 10px 30px rgba(17, 38, 62, 0.10);
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .contact img {
-      width: 21px;
-      height: 21px;
-      display: block;
-    }
-
-    .contact span {
-      font-size: 14px;
-      font-weight: 600;
-      letter-spacing: 0.2px;
-    }
-
-    .mailBtn {
-      position: absolute;
-      right: 0;
-      height: 43px;
-      width: 43px;
-      top: 50%;
-      transform: translate(2px, -50%);
-    }
-
-    /* BODY (ortalanmış) */
-    .body {
-      flex: 1;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: clamp(20px, 5vw, 40px) 0 clamp(18px, 4vw, 30px);
-      text-align: center;
-    }
-
-    .bgimg {
-      /* background image %100 fit (cover) */
-      background-image: url("img/bg.png");
-      background-size: cover;
-      background-position: center;
-      background-repeat: no-repeat;
-
-      /* biraz yumuşatma için opsiyonel */
-      background-color: #f6f8fb;
-
-    }
-
-    .bodybg {
-      min-height: calc(100svh - var(--headerwd));
-
-    }
-
-    /* ortadaki içerik kutusu (görseldeki gibi hafif cam efekti) 
-    .heroCard{
-      width: min(820px, 100%);
-      padding: 42px 26px;
-      background: rgba(255,255,255,0.42);
-      border: 1px solid rgba(255,255,255,0.55);
-      backdrop-filter: blur(10px);
-      box-shadow: 0 18px 60px rgba(17, 38, 62, 0.12);
-      border-radius: 22px;
-    }
-    */
-
-    .heroCard {
-      width: min(820px, 100%);
-      margin: 0 auto;
-      padding: clamp(8px, 2vw, 16px);
-    }
-
-    .kicker {
-      font-weight: 700;
-      /* Bold */
-      font-size: clamp(26px, 4vw, 40px);
-      /* ~32pt */
-      line-height: 1.15;
-      letter-spacing: 0.6px;
-      margin: clamp(24px, 6vw, 80px) 0 clamp(20px, 4vw, 40px);
-      text-transform: uppercase;
-    }
-
-    .sub {
-      font-weight: 600;
-      /* SemiBold */
-      font-size: clamp(18px, 2.5vw, 23px);
-      /* ~26pt */
-      line-height: 1.25;
-      margin: 0 0 1px;
-    }
-
-    .coming {
-      font-weight: 700;
-      /* Bold */
-      font-size: clamp(34px, 6vw, 56px);
-      /* ~42pt */
-      line-height: 1;
-      margin: clamp(28px, 5vw, 50px) 0 clamp(18px, 3vw, 26px);
-      letter-spacing: 1px;
-    }
-
-    .notify {
-      font-weight: 500;
-      /* Medium */
-      font-size: clamp(16px, 2vw, 19px);
-      /* ~21pt */
-      margin: 0 0 14px;
-    }
-
-    .heroSpacer {
-      height: clamp(48px, 12vw, 150px);
-    }
-
-    /* input + içindeki buton */
-    .emailWrap {
-      position: relative;
-      width: min(520px, 100%);
-      margin: 0 auto;
-    }
-
-    .icon-white {
-      color: white;
-    }
-
-    .emailInput {
-      width: 100%;
-      height: clamp(52px, 8vw, 56px);
-      padding: 0 64px 0 18px;
-      /* sağda buton için boşluk */
-      border: 1px solid rgba(24, 48, 81, 0.10);
-      outline: none;
-      background: rgba(255, 255, 255, 0.75);
-      color: var(--text);
-      font-size: 14px;
-      box-shadow: 0 14px 40px rgba(17, 38, 62, 0.10);
-    }
-
-    .emailInput::placeholder {
-      color: rgba(24, 48, 81, 0.55);
-      font-weight: 300;
-    }
-
-    .sendBtn {
-      position: absolute;
-      right: 0;
-      top: 50%;
-      transform: translateY(-50%);
-      width: clamp(80px, 18vw, 100px);
-      height: clamp(52px, 8vw, 55px);
-      padding: 0;
-    }
-
-    .sendBtn img {
-      width: 30px;
-      height: 30px;
-      display: block;
-      right: 0;
-    }
-
-    /* FOOTER */
-    .icon-white {
-      color: white;
-    }
-
-    .footer {
-      padding: 18px 0 34px;
-      color: var(--footerText);
-    }
-
-    .footerTitle {
-      text-align: center;
-      font-weight: 300;
-      /* Light */
-      font-size: 21px;
-      /* ~16pt */
-      margin: 8px 0 18px;
-    }
-
-    .qaGrid {
-      display: grid;
-      grid-template-columns: repeat(6, minmax(0, 1fr));
-      gap: 18px;
-    }
-
-    .qaCol {
-      padding: 10px 6px;
-    }
-
-    .qaCol h5 {
-      padding: 8px 8px;
-      margin: 0;
-    }
-
-    .qaItem {
-      font-weight: 300;
-      /* Light */
-      font-style: italic;
-      /* Light Italic */
-      font-size: 10px;
-      /* ~13pt */
-      line-height: 1.35;
-      margin: 0 0 3px;
-      color: var(--footerText);
-    }
-
-    /* Responsive */
-    @media (max-width: 1200px) {
-      .qaGrid {
-        grid-template-columns: repeat(3, minmax(0, 1fr));
+        --containerMax: 1100px;
+        --radius: 999px;
+        /* yuvarlak/oval */
+        --radius-md: 40px;
+        /* input gibi yuvarlak */
+        --headerwd: 70px;
       }
-    }
 
-    @media (max-width: 980px) {
-      .header {
+      * {
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        height: 100%;
+      }
+
+      body {
+        margin: 0;
+        font-family:
+          "Poppins",
+          system-ui,
+          -apple-system,
+          Segoe UI,
+          Roboto,
+          Arial,
+          sans-serif;
+        color: var(--text);
+        min-height: 100svh;
+
+        /*
+          background-image: url("img/bg.png");
+          background-size: cover;
+          background-position: center;
+          background-repeat: no-repeat;
+
+          background-color: #f6f8fb;
+        */
+
+        background-color: #e8e9ea;
+      }
+
+      /* standart container margin */
+      .container {
+        max-width: var(--containerMax);
+        margin: 0 auto;
+        padding: 0 clamp(16px, 4vw, 24px);
+
+        display: flex;
         flex-direction: column;
-        justify-content: center;
+      }
+
+      /* ortak yuvarlak class */
+      .rounded {
+        border-radius: var(--radius);
+      }
+
+      .rounded-md {
+        border-radius: var(--radius-md);
+      }
+
+      /* button ortak */
+      .btn {
+        border: 0;
+        cursor: pointer;
+        background: linear-gradient(135deg, var(--btn1), var(--btn2));
+        color: var(--text);
+        display: inline-flex;
         align-items: center;
-        gap: 14px;
-        padding-top: 12px;
+        justify-content: center;
+        gap: 10px;
+        padding: 10px 16px;
+        box-shadow: 0 10px 30px rgba(17, 38, 62, 0.12);
+        transition:
+          transform 150ms ease,
+          box-shadow 150ms ease;
+        font-weight: 600;
+      }
+
+      /* HEADER */
+      .header {
+        min-height: var(--headerwd);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-top: 15px;
+        padding-top: 14px;
+        gap: 12px;
+        /* görselde biraz aşağıda gibi */
       }
 
       .logo {
-        width: 100%;
-        justify-content: center;
-      }
-
-      .contact {
-        width: 100%;
-        justify-content: center;
-      }
-
-      .qaGrid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-      }
-    }
-
-    @media (max-width: 560px) {
-      .contact .pill {
-        padding-right: 56px;
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
       }
 
       .logo img {
-        height: clamp(42px, 12vw, 52px);
+        width: auto;
+        height: clamp(48px, 9vw, 70px);
+        /* istenen */
+        max-width: 413px;
+        /* istenen svg ölçüsü */
+        display: block;
+      }
+
+      .contact {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        text-decoration: none;
+        color: var(--text);
+      }
+
+      .contact .pill {
+        position: relative;
+        padding: 10px 16px;
+        padding-right: 60px;
+        min-width: max-content;
+        background: rgba(255, 255, 255, 0.65);
+        backdrop-filter: blur(8px);
+        border: 1px solid rgba(255, 255, 255, 0.55);
+        box-shadow: 0 10px 30px rgba(17, 38, 62, 0.1);
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .contact img {
+        width: 21px;
+        height: 21px;
+        display: block;
       }
 
       .contact span {
-        display: inline;
-        font-size: 13px;
+        font-size: 14px;
+        font-weight: 600;
+        letter-spacing: 0.2px;
+      }
+
+      .mailBtn {
+        position: absolute;
+        right: 0;
+        height: 43px;
+        width: 43px;
+        top: 50%;
+        transform: translate(2px, -50%);
+      }
+
+      /* BODY (ortalanmış) */
+      .body {
+        flex: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: clamp(20px, 5vw, 40px) 0 clamp(18px, 4vw, 30px);
+        text-align: center;
+      }
+
+      .bgimg {
+        /* background image %100 fit (cover) */
+        background-image: url("img/bg.png");
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+
+        /* biraz yumuşatma için opsiyonel */
+        background-color: #f6f8fb;
+      }
+
+      .bodybg {
+        min-height: calc(100svh - var(--headerwd));
+      }
+
+      /* ortadaki içerik kutusu (görseldeki gibi hafif cam efekti)
+        .heroCard{
+          width: min(820px, 100%);
+          padding: 42px 26px;
+          background: rgba(255,255,255,0.42);
+          border: 1px solid rgba(255,255,255,0.55);
+          backdrop-filter: blur(10px);
+          box-shadow: 0 18px 60px rgba(17, 38, 62, 0.12);
+          border-radius: 22px;
+        }
+        */
+
+      .heroCard {
+        width: min(820px, 100%);
+        margin: 0 auto;
+        padding: clamp(8px, 2vw, 16px);
+      }
+
+      .kicker {
+        font-weight: 700;
+        /* Bold */
+        font-size: clamp(26px, 4vw, 40px);
+        /* ~32pt */
+        line-height: 1.15;
+        letter-spacing: 0.6px;
+        margin: clamp(24px, 6vw, 80px) 0 clamp(20px, 4vw, 40px);
+        text-transform: uppercase;
+      }
+
+      .sub {
+        font-weight: 600;
+        /* SemiBold */
+        font-size: clamp(18px, 2.5vw, 23px);
+        /* ~26pt */
+        line-height: 1.25;
+        margin: 0 0 1px;
+      }
+
+      .coming {
+        font-weight: 700;
+        /* Bold */
+        font-size: clamp(34px, 6vw, 56px);
+        /* ~42pt */
+        line-height: 1;
+        margin: clamp(28px, 5vw, 50px) 0 clamp(18px, 3vw, 26px);
+        letter-spacing: 1px;
+      }
+
+      .notify {
+        font-weight: 500;
+        /* Medium */
+        font-size: clamp(16px, 2vw, 19px);
+        /* ~21pt */
+        margin: 0 0 14px;
+      }
+
+      .heroSpacer {
+        height: clamp(48px, 12vw, 150px);
+      }
+
+      /* input + içindeki buton */
+      .emailWrap {
+        position: relative;
+        width: min(520px, 100%);
+        margin: 0 auto;
+      }
+
+      .icon-white {
+        color: white;
+      }
+
+      .emailInput {
+        width: 100%;
+        height: clamp(52px, 8vw, 56px);
+        padding: 0 64px 0 18px;
+        /* sağda buton için boşluk */
+        border: 1px solid rgba(24, 48, 81, 0.1);
+        outline: none;
+        background: rgba(255, 255, 255, 0.75);
+        color: var(--text);
+        font-size: 14px;
+        box-shadow: 0 14px 40px rgba(17, 38, 62, 0.1);
+      }
+
+      .emailInput::placeholder {
+        color: rgba(24, 48, 81, 0.55);
+        font-weight: 300;
+      }
+
+      .sendBtn {
+        position: absolute;
+        right: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        width: clamp(80px, 18vw, 100px);
+        height: clamp(52px, 8vw, 55px);
+        padding: 0;
+      }
+
+      .sendBtn img {
+        width: 30px;
+        height: 30px;
+        display: block;
+        right: 0;
+      }
+
+      /* FOOTER */
+      .icon-white {
+        color: white;
+      }
+
+      .footer {
+        padding: 18px 0 34px;
+        color: var(--footerText);
+      }
+
+      .footerTitle {
+        text-align: center;
+        font-weight: 300;
+        /* Light */
+        font-size: 21px;
+        /* ~16pt */
+        margin: 8px 0 18px;
       }
 
       .qaGrid {
-        grid-template-columns: 1fr;
+        display: grid;
+        grid-template-columns: repeat(6, minmax(0, 1fr));
+        gap: 18px;
       }
 
       .qaCol {
-        text-align: center;
+        padding: 10px 6px;
       }
 
       .qaCol h5 {
-        text-align: center;
+        padding: 8px 8px;
+        margin: 0;
       }
-    }
-  </style>
-</head>
 
-<body>
-  <div class="bgimg">
-    <div class="container">
-      <!-- HEADER -->
-      <div class="header">
-        <div class="logo">
-          <img src="img/piyasal_logo.svg" alt="Piyasal Logo" width="413" height="70" />
-        </div>
+      .qaItem {
+        font-weight: 300;
+        /* Light */
+        font-style: italic;
+        /* Light Italic */
+        font-size: 10px;
+        /* ~13pt */
+        line-height: 1.35;
+        margin: 0 0 3px;
+        color: var(--footerText);
+      }
 
-        <a class="contact" href="mailto:info@piyasal.com">
-          <div class="pill rounded">
-            <span>Bize Ulaşın</span>
-            <button class="btn rounded mailBtn" type="submit" aria-label="Gönder">
-              <img src="img/mail.svg" class="icon-white" alt="Mail" />
-            </button>
-          </div>
-        </a>
-      </div>
-    </div>
+      /* Responsive */
+      @media (max-width: 980px) {
+        .header {
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          gap: 14px;
+          padding-top: 12px;
+        }
 
-    <!-- BODY -->
-    <div class="bodybg">
+        .logo {
+          width: 100%;
+          justify-content: center;
+        }
+
+        .contact {
+          width: 100%;
+          justify-content: center;
+        }
+      }
+
+      @media (max-width: 560px) {
+        .body {
+          padding-top: 34px;
+          align-items: stretch;
+        }
+
+        .contact .pill {
+          padding-right: 56px;
+        }
+
+        .logo img {
+          height: clamp(42px, 12vw, 52px);
+        }
+
+        .contact span {
+          display: inline;
+          font-size: 13px;
+        }
+
+        .heroCard {
+          min-height: 68svh;
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
+        }
+
+        .heroSpacer {
+          height: clamp(24px, 8vw, 44px);
+        }
+
+        .qaGrid {
+          grid-template-columns: 1fr;
+        }
+
+        .qaCol {
+          text-align: center;
+        }
+
+        .qaCol h5 {
+          text-align: center;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="bgimg">
       <div class="container">
-        <div class="body">
-          <div class="heroCard">
-            <h1 class="kicker">PİYASALARI TAKİP ETMENİN EN KOLAY YOLU</h1>
-            <p class="sub">Döviz, altın, kripto ve borsa tek ekranda.</p>
-            <p class="sub">Anlık, sade ve net.</p>
-            <div class="coming">YAKINDA</div>
+        <!-- HEADER -->
+        <div class="header">
+          <div class="logo">
+            <img
+              src="img/piyasal_logo.svg"
+              alt="Piyasal Logo"
+              width="413"
+              height="70"
+            />
+          </div>
 
-            <div class="heroSpacer"></div>
-
-            <div class="notify">Gelişmelerden haberdar olun:</div>
-
-            <form class="emailWrap" action="#" method="post">
-              <input class="emailInput rounded-md" type="email" name="email" placeholder="E-posta adresinizi girin"
-                autocomplete="email" />
-              <button class="btn rounded sendBtn" type="submit" aria-label="Gönder">
-                <img src="img/send.svg" width="33" height="35" alt="Gönder" />
+          <a class="contact" href="mailto:info@piyasal.com">
+            <div class="pill rounded">
+              <span>Bize Ulaşın</span>
+              <button
+                class="btn rounded mailBtn"
+                type="submit"
+                aria-label="Gönder"
+              >
+                <img src="img/mail.svg" class="icon-white" alt="Mail" />
               </button>
-            </form>
+            </div>
+          </a>
+        </div>
+      </div>
+
+      <!-- BODY -->
+      <div class="bodybg">
+        <div class="container">
+          <div class="body">
+            <div class="heroCard">
+              <h1 class="kicker">PİYASALARI TAKİP ETMENİN EN KOLAY YOLU</h1>
+              <p class="sub">Döviz, altın, kripto ve borsa tek ekranda.</p>
+              <p class="sub">Anlık, sade ve net.</p>
+              <div class="coming">YAKINDA</div>
+
+              <div class="heroSpacer"></div>
+
+              <div class="notify">Gelişmelerden haberdar olun:</div>
+
+              <form class="emailWrap" action="#" method="post">
+                <input
+                  class="emailInput rounded-md"
+                  type="email"
+                  name="email"
+                  placeholder="E-posta adresinizi girin"
+                  autocomplete="email"
+                />
+                <button
+                  class="btn rounded sendBtn"
+                  type="submit"
+                  aria-label="Gönder"
+                >
+                  <img src="img/send.svg" width="33" height="35" alt="Gönder" />
+                </button>
+              </form>
+            </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
 
-  <!-- FOOTER -->
-  <div class="container">
-    <div class="footer">
-      <div class="footerTitle">Sık Aranan Finans Soruları</div>
+    <!-- FOOTER -->
+    <div class="container">
+      <div class="footer">
+        <div class="footerTitle">Sık Aranan Finans Soruları</div>
 
-      <div class="qaGrid">
-        <div class="qaCol">
-          <h5>Dolar</h5>
-          <p class="qaItem">
-            dolar kaç TL
-          </p>
-          <p class="qaItem">
-            dolar kuru bugün
-          </p>
-          <p class="qaItem">
-            canlı dolar kuru
-          </p>
-          <p class="qaItem">
-            1 dolar kaç TL
-          </p>
-          <p class="qaItem">
-            100 dolar kaç TL
-          </p>
-          <p class="qaItem">
-            1000 dolar kaç TL
-          </p>
-          <p class="qaItem">
-            dolar alış fiyatı
-          </p>
-          <p class="qaItem">
-            dolar satış fiyatı
-          </p>
-          <p class="qaItem">
-            dolar alış satış farkı
-          </p>
-          <p class="qaItem">
-            dolar ne kadar oldu
-          </p>
-          <p class="qaItem">
-            dolar yükselecek mi
-          </p>
-          <p class="qaItem">
-            dolar düşer mi
-          </p>
-          <p class="qaItem">
-            dolar grafiği
-          </p>
-          <p class="qaItem">
-            merkez bankası dolar kuru
-          </p>
-          <p class="qaItem">
-            efektif dolar kuru
-          </p>
-          <p class="qaItem">
-            dolar bugün kaç TL
-          </p>
-          <p class="qaItem">
-            dolar yorum
-          </p>
-          <p class="qaItem">
-            dolar tahmini
-          </p>
-          <p class="qaItem">
-            dolar en yüksek kaç oldu
-          </p>
-          <p class="qaItem">
-            dolar en düşük kaç oldu
-          </p>
-        </div>
-        <div class="qaCol">
-          <h5>Euro</h5>
-          <p class="qaItem">
-            euro kaç TL
-          </p>
-          <p class="qaItem">
-            euro kuru bugün
-          </p>
-          <p class="qaItem">
-            canlı euro kuru
-          </p>
-          <p class="qaItem">
-            1 euro kaç TL
-          </p>
-          <p class="qaItem">
-            100 euro kaç TL
-          </p>
-          <p class="qaItem">
-            euro alış fiyatı
-          </p>
-          <p class="qaItem">
-            euro satış fiyatı
-          </p>
-          <p class="qaItem">
-            euro alış satış farkı
-          </p>
-          <p class="qaItem">
-            euro ne kadar oldu
-          </p>
-          <p class="qaItem">
-            euro yükselecek mi
-          </p>
-          <p class="qaItem">
-            euro düşer mi
-          </p>
-          <p class="qaItem">
-            euro grafiği
-          </p>
-          <p class="qaItem">
-            merkez bankası euro kuru
-          </p>
-          <p class="qaItem">
-            euro dolar paritesi
-          </p>
-          <p class="qaItem">
-            euro bugün kaç TL
-          </p>
-          <p class="qaItem">
-            euro yorum
-          </p>
-          <p class="qaItem">
-            euro tahmini
-          </p>
-          <p class="qaItem">
-            euro en yüksek kaç oldu
-          </p>
-          <p class="qaItem">
-            euro en düşük kaç oldu
-          </p>
-          <p class="qaItem">
-            1000 euro kaç TL
-          </p>
-        </div>
+        <div class="qaGrid">
+          <div class="qaCol">
+            <h5>Dolar</h5>
+            <p class="qaItem">dolar kaç TL</p>
+            <p class="qaItem">dolar kuru bugün</p>
+            <p class="qaItem">canlı dolar kuru</p>
+            <p class="qaItem">1 dolar kaç TL</p>
+            <p class="qaItem">100 dolar kaç TL</p>
+            <p class="qaItem">1000 dolar kaç TL</p>
+            <p class="qaItem">dolar alış fiyatı</p>
+            <p class="qaItem">dolar satış fiyatı</p>
+            <p class="qaItem">dolar alış satış farkı</p>
+            <p class="qaItem">dolar ne kadar oldu</p>
+            <p class="qaItem">dolar yükselecek mi</p>
+            <p class="qaItem">dolar düşer mi</p>
+            <p class="qaItem">dolar grafiği</p>
+            <p class="qaItem">merkez bankası dolar kuru</p>
+            <p class="qaItem">efektif dolar kuru</p>
+            <p class="qaItem">dolar bugün kaç TL</p>
+            <p class="qaItem">dolar yorum</p>
+            <p class="qaItem">dolar tahmini</p>
+            <p class="qaItem">dolar en yüksek kaç oldu</p>
+            <p class="qaItem">dolar en düşük kaç oldu</p>
+          </div>
+          <div class="qaCol">
+            <h5>Euro</h5>
+            <p class="qaItem">euro kaç TL</p>
+            <p class="qaItem">euro kuru bugün</p>
+            <p class="qaItem">canlı euro kuru</p>
+            <p class="qaItem">1 euro kaç TL</p>
+            <p class="qaItem">100 euro kaç TL</p>
+            <p class="qaItem">euro alış fiyatı</p>
+            <p class="qaItem">euro satış fiyatı</p>
+            <p class="qaItem">euro alış satış farkı</p>
+            <p class="qaItem">euro ne kadar oldu</p>
+            <p class="qaItem">euro yükselecek mi</p>
+            <p class="qaItem">euro düşer mi</p>
+            <p class="qaItem">euro grafiği</p>
+            <p class="qaItem">merkez bankası euro kuru</p>
+            <p class="qaItem">euro dolar paritesi</p>
+            <p class="qaItem">euro bugün kaç TL</p>
+            <p class="qaItem">euro yorum</p>
+            <p class="qaItem">euro tahmini</p>
+            <p class="qaItem">euro en yüksek kaç oldu</p>
+            <p class="qaItem">euro en düşük kaç oldu</p>
+            <p class="qaItem">1000 euro kaç TL</p>
+          </div>
 
-        <div class="qaCol">
-          <h5>Altın</h5>
-          <p class="qaItem">
-            gram altın ne kadar
-          </p>
-          <p class="qaItem">
-            çeyrek altın ne kadar
-          </p>
-          <p class="qaItem">
-            yarım altın ne kadar
-          </p>
-          <p class="qaItem">
-            tam altın ne kadar
-          </p>
-          <p class="qaItem">
-            cumhuriyet altını ne kadar
-          </p>
-          <p class="qaItem">
-            altın fiyatları bugün
-          </p>
-          <p class="qaItem">
-            canlı altın fiyatları
-          </p>
-          <p class="qaItem">
-            1 gram altın kaç TL
-          </p>
-          <p class="qaItem">
-            10 gram altın ne kadar
-          </p>
-          <p class="qaItem">
-            22 ayar altın kaç TL
-          </p>
-          <p class="qaItem">
-            24 ayar altın kaç TL
-          </p>
-          <p class="qaItem">
-            altın alış satış fiyatı
-          </p>
-          <p class="qaItem">
-            altın grafiği canlı
-          </p>
-          <p class="qaItem">
-            ons altın kaç dolar
-          </p>
-          <p class="qaItem">
-            ons altın ne kadar
-          </p>
-          <p class="qaItem">
-            altın neden yükseliyor
-          </p>
-          <p class="qaItem">
-            altın düşer mi
-          </p>
-          <p class="qaItem">
-            altın yükselir mi
-          </p>
-          <p class="qaItem">
-            bugün altın kaç TL oldu
-          </p>
-          <p class="qaItem">
-            altın yatırım için uygun mu
-          </p>
-        </div>
+          <div class="qaCol">
+            <h5>Altın</h5>
+            <p class="qaItem">gram altın ne kadar</p>
+            <p class="qaItem">çeyrek altın ne kadar</p>
+            <p class="qaItem">yarım altın ne kadar</p>
+            <p class="qaItem">tam altın ne kadar</p>
+            <p class="qaItem">cumhuriyet altını ne kadar</p>
+            <p class="qaItem">altın fiyatları bugün</p>
+            <p class="qaItem">canlı altın fiyatları</p>
+            <p class="qaItem">1 gram altın kaç TL</p>
+            <p class="qaItem">10 gram altın ne kadar</p>
+            <p class="qaItem">22 ayar altın kaç TL</p>
+            <p class="qaItem">24 ayar altın kaç TL</p>
+            <p class="qaItem">altın alış satış fiyatı</p>
+            <p class="qaItem">altın grafiği canlı</p>
+            <p class="qaItem">ons altın kaç dolar</p>
+            <p class="qaItem">ons altın ne kadar</p>
+            <p class="qaItem">altın neden yükseliyor</p>
+            <p class="qaItem">altın düşer mi</p>
+            <p class="qaItem">altın yükselir mi</p>
+            <p class="qaItem">bugün altın kaç TL oldu</p>
+            <p class="qaItem">altın yatırım için uygun mu</p>
+          </div>
 
-        <div class="qaCol">
-          <h5>Kripto</h5>
-          <p class="qaItem">
-            bitcoin kaç dolar
-          </p>
-          <p class="qaItem">
-            bitcoin kaç TL
-          </p>
-          <p class="qaItem">
-            ethereum kaç dolar
-          </p>
-          <p class="qaItem">
-            ethereum kaç TL
-          </p>
-          <p class="qaItem">
-            btc fiyatı canlı
-          </p>
-          <p class="qaItem">
-            eth fiyatı canlı
-          </p>
-          <p class="qaItem">
-            kripto para fiyatları
-          </p>
-          <p class="qaItem">
-            bitcoin neden düşüyor
-          </p>
-          <p class="qaItem">
-            bitcoin neden yükseliyor
-          </p>
-          <p class="qaItem">
-            ethereum neden düşüyor
-          </p>
-          <p class="qaItem">
-            ethereum neden yükseliyor
-          </p>
-          <p class="qaItem">
-            en iyi kripto para
-          </p>
-          <p class="qaItem">
-            altcoin nedir
-          </p>
-          <p class="qaItem">
-            kripto piyasası bugün
-          </p>
-          <p class="qaItem">
-            btc grafik canlı
-          </p>
-          <p class="qaItem">
-            eth grafik canlı
-          </p>
-          <p class="qaItem">
-            kripto analiz
-          </p>
-          <p class="qaItem">
-            bitcoin en yüksek kaç dolar oldu
-          </p>
-          <p class="qaItem">
-            bitcoin en düşük kaç dolar oldu
-          </p>
-          <p class="qaItem">
-            kripto para yatırım için uygun mu
-          </p>
-        </div>
+          <div class="qaCol">
+            <h5>Kripto</h5>
+            <p class="qaItem">bitcoin kaç dolar</p>
+            <p class="qaItem">bitcoin kaç TL</p>
+            <p class="qaItem">ethereum kaç dolar</p>
+            <p class="qaItem">ethereum kaç TL</p>
+            <p class="qaItem">btc fiyatı canlı</p>
+            <p class="qaItem">eth fiyatı canlı</p>
+            <p class="qaItem">kripto para fiyatları</p>
+            <p class="qaItem">bitcoin neden düşüyor</p>
+            <p class="qaItem">bitcoin neden yükseliyor</p>
+            <p class="qaItem">ethereum neden düşüyor</p>
+            <p class="qaItem">ethereum neden yükseliyor</p>
+            <p class="qaItem">en iyi kripto para</p>
+            <p class="qaItem">altcoin nedir</p>
+            <p class="qaItem">kripto piyasası bugün</p>
+            <p class="qaItem">btc grafik canlı</p>
+            <p class="qaItem">eth grafik canlı</p>
+            <p class="qaItem">kripto analiz</p>
+            <p class="qaItem">bitcoin en yüksek kaç dolar oldu</p>
+            <p class="qaItem">bitcoin en düşük kaç dolar oldu</p>
+            <p class="qaItem">kripto para yatırım için uygun mu</p>
+          </div>
 
-        <div class="qaCol">
-          <h5>Borsa</h5>
-          <p class="qaItem">
-            borsa istanbul canlı
-          </p>
-          <p class="qaItem">
-            bist 100 kaç
-          </p>
-          <p class="qaItem">
-            bist 100 endeksi
-          </p>
-          <p class="qaItem">
-            hisse senedi fiyatları
-          </p>
-          <p class="qaItem">
-            en çok yükselen hisseler
-          </p>
-          <p class="qaItem">
-            en çok düşen hisseler
-          </p>
-          <p class="qaItem">
-            borsa neden düştü
-          </p>
-          <p class="qaItem">
-            borsa neden yükseldi
-          </p>
-          <p class="qaItem">
-            hisse analizi
-          </p>
-          <p class="qaItem">
-            bist grafik canlı
-          </p>
-          <p class="qaItem">
-            borsa yorumları
-          </p>
-          <p class="qaItem">
-            yatırım tavsiyeleri
-          </p>
-          <p class="qaItem">
-            hisse önerileri
-          </p>
-          <p class="qaItem">
-            bist 30 hisseleri
-          </p>
-          <p class="qaItem">
-            bist 50 hisseleri
-          </p>
-          <p class="qaItem">
-            bist 100 hisseleri
-          </p>
-          <p class="qaItem">
-            bugün borsa kaç puan
-          </p>
-          <p class="qaItem">
-            borsa açılış kapanış saatleri
-          </p>
-          <p class="qaItem">
-            hangi hisse alınmalı
-          </p>
-          <p class="qaItem">
-            temettü veren hisseler
-          </p>
-        </div>
-        <div class="qaCol">
-          <h5>Genel</h5>
-          <p class="qaItem">
-            canlı piyasa verileri
-          </p>
-          <p class="qaItem">
-            finans haberleri
-          </p>
-          <p class="qaItem">
-            ekonomik takvim
-          </p>
-          <p class="qaItem">
-            faiz oranları
-          </p>
-          <p class="qaItem">
-            merkez bankası faiz kararı
-          </p>
-          <p class="qaItem">
-            enflasyon oranı
-          </p>
-          <p class="qaItem">
-            yatırım araçları
-          </p>
-          <p class="qaItem">
-            en iyi yatırım nedir
-          </p>
-          <p class="qaItem">
-            para nasıl değerlendirilir
-          </p>
-          <p class="qaItem">
-            pasif gelir yolları
-          </p>
-          <p class="qaItem">
-            faiz ne zaman düşecek
-          </p>
-          <p class="qaItem">
-            faiz ne zaman artacak
-          </p>
-          <p class="qaItem">
-            dolar faizi kaç
-          </p>
-          <p class="qaItem">
-            mevduat faiz oranları
-          </p>
-          <p class="qaItem">
-            kredi faiz oranları
-          </p>
-          <p class="qaItem">
-            konut kredisi faiz oranı
-          </p>
-          <p class="qaItem">
-            ihtiyaç kredisi faiz oranı
-          </p>
-          <p class="qaItem">
-            yatırım için en güvenli araç
-          </p>
-          <p class="qaItem">
-            altın mı dolar mı daha karlı
-          </p>
-          <p class="qaItem">
-            borsa mı mevduat mı
-          </p>
+          <div class="qaCol">
+            <h5>Borsa</h5>
+            <p class="qaItem">borsa istanbul canlı</p>
+            <p class="qaItem">bist 100 kaç</p>
+            <p class="qaItem">bist 100 endeksi</p>
+            <p class="qaItem">hisse senedi fiyatları</p>
+            <p class="qaItem">en çok yükselen hisseler</p>
+            <p class="qaItem">en çok düşen hisseler</p>
+            <p class="qaItem">borsa neden düştü</p>
+            <p class="qaItem">borsa neden yükseldi</p>
+            <p class="qaItem">hisse analizi</p>
+            <p class="qaItem">bist grafik canlı</p>
+            <p class="qaItem">borsa yorumları</p>
+            <p class="qaItem">yatırım tavsiyeleri</p>
+            <p class="qaItem">hisse önerileri</p>
+            <p class="qaItem">bist 30 hisseleri</p>
+            <p class="qaItem">bist 50 hisseleri</p>
+            <p class="qaItem">bist 100 hisseleri</p>
+            <p class="qaItem">bugün borsa kaç puan</p>
+            <p class="qaItem">borsa açılış kapanış saatleri</p>
+            <p class="qaItem">hangi hisse alınmalı</p>
+            <p class="qaItem">temettü veren hisseler</p>
+          </div>
+          <div class="qaCol">
+            <h5>Genel</h5>
+            <p class="qaItem">canlı piyasa verileri</p>
+            <p class="qaItem">finans haberleri</p>
+            <p class="qaItem">ekonomik takvim</p>
+            <p class="qaItem">faiz oranları</p>
+            <p class="qaItem">merkez bankası faiz kararı</p>
+            <p class="qaItem">enflasyon oranı</p>
+            <p class="qaItem">yatırım araçları</p>
+            <p class="qaItem">en iyi yatırım nedir</p>
+            <p class="qaItem">para nasıl değerlendirilir</p>
+            <p class="qaItem">pasif gelir yolları</p>
+            <p class="qaItem">faiz ne zaman düşecek</p>
+            <p class="qaItem">faiz ne zaman artacak</p>
+            <p class="qaItem">dolar faizi kaç</p>
+            <p class="qaItem">mevduat faiz oranları</p>
+            <p class="qaItem">kredi faiz oranları</p>
+            <p class="qaItem">konut kredisi faiz oranı</p>
+            <p class="qaItem">ihtiyaç kredisi faiz oranı</p>
+            <p class="qaItem">yatırım için en güvenli araç</p>
+            <p class="qaItem">altın mı dolar mı daha karlı</p>
+            <p class="qaItem">borsa mı mevduat mı</p>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-</body>
-
+  </body>
 </html>
