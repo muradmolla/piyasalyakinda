@@ -1,0 +1,465 @@
+<!doctype html>
+<html lang="tr">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Piyasal - Yakında</title>
+
+  <!-- Poppins font load -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,500;0,600;0,700;1,300&display=swap"
+    rel="stylesheet" />
+
+  <style>
+    :root {
+      --text: #183051;
+      --footerText: #bbc2c9;
+      --btn1: #70aadd;
+      --btn2: #ceeafb;
+
+      --containerMax: 1100px;
+      --radius: 999px;
+      /* yuvarlak/oval */
+      --radius-md: 40px;
+      /* input gibi yuvarlak */
+      --headerwd: 70px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      height: 100%;
+    }
+
+    body {
+      margin: 0;
+      font-family: "Poppins", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      color: var(--text);
+
+      /*
+      background-image: url("img/bg.png");
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+
+      background-color: #f6f8fb;
+    */
+
+      background-color: #e8e9ea;
+    }
+
+    /* standart container margin */
+    .container {
+      max-width: var(--containerMax);
+      margin: 0 auto;
+      padding: 0 24px;
+
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* ortak yuvarlak class */
+    .rounded {
+      border-radius: var(--radius);
+    }
+
+    .rounded-md {
+      border-radius: var(--radius-md);
+    }
+
+    /* button ortak */
+    .btn {
+      border: 0;
+      cursor: pointer;
+      background: linear-gradient(135deg, var(--btn1), var(--btn2));
+      color: var(--text);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 10px 16px;
+      box-shadow: 0 10px 30px rgba(17, 38, 62, 0.12);
+      transition: transform 150ms ease, box-shadow 150ms ease;
+      font-weight: 600;
+    }
+
+    /* HEADER */
+    .header {
+      height: --headerwd;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-top: 14px;
+      /* görselde biraz aşağıda gibi */
+    }
+
+    .logo {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .logo img {
+      width: auto;
+      height: 70px;
+      /* istenen */
+      max-width: 413px;
+      /* istenen svg ölçüsü */
+      display: block;
+    }
+
+    .contact {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      color: var(--text);
+    }
+
+    .contact .pill {
+      padding: 10px 16px;
+      padding-right: 60px;
+      background: rgba(255, 255, 255, 0.65);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(255, 255, 255, 0.55);
+      box-shadow: 0 10px 30px rgba(17, 38, 62, 0.10);
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .contact img {
+      width: 21px;
+      height: 21px;
+      display: block;
+    }
+
+    .contact span {
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: 0.2px;
+    }
+
+    .mailBtn {
+      position: absolute;
+      right: 0;
+      height: 43px;
+      width: 43px;
+      transform: translate(2px);
+    }
+
+    /* BODY (ortalanmış) */
+    .body {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 40px 0 30px;
+      text-align: center;
+    }
+
+    .bgimg {
+      /* background image %100 fit (cover) */
+      background-image: url("img/bg.png");
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+
+      /* biraz yumuşatma için opsiyonel */
+      background-color: #f6f8fb;
+
+    }
+
+    .bodybg {
+      height: calc(100vh - 70px);
+
+    }
+
+    /* ortadaki içerik kutusu (görseldeki gibi hafif cam efekti) 
+    .heroCard{
+      width: min(820px, 100%);
+      padding: 42px 26px;
+      background: rgba(255,255,255,0.42);
+      border: 1px solid rgba(255,255,255,0.55);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 18px 60px rgba(17, 38, 62, 0.12);
+      border-radius: 22px;
+    }
+    */
+
+    .kicker {
+      font-weight: 700;
+      /* Bold */
+      font-size: 43px;
+      /* ~32pt */
+      line-height: 1.15;
+      letter-spacing: 0.6px;
+      margin: 80px 0 40px;
+      text-transform: uppercase;
+    }
+
+    .sub {
+      font-weight: 600;
+      /* SemiBold */
+      font-size: 35px;
+      /* ~26pt */
+      line-height: 1.25;
+      margin: 0 0 1px;
+    }
+
+    .coming {
+      font-weight: 700;
+      /* Bold */
+      font-size: 56px;
+      /* ~42pt */
+      line-height: 1;
+      margin: 50px 0 26px;
+      letter-spacing: 1px;
+    }
+
+    .notify {
+      font-weight: 500;
+      /* Medium */
+      font-size: 28px;
+      /* ~21pt */
+      margin: 0 0 14px;
+    }
+
+    /* input + içindeki buton */
+    .emailWrap {
+      position: relative;
+      width: min(520px, 100%);
+      margin: 0 auto;
+    }
+
+    .icon-white {
+      color: white;
+    }
+
+    .emailInput {
+      width: 100%;
+      height: 56px;
+      padding: 0 64px 0 18px;
+      /* sağda buton için boşluk */
+      border: 1px solid rgba(24, 48, 81, 0.10);
+      outline: none;
+      background: rgba(255, 255, 255, 0.75);
+      color: var(--text);
+      font-size: 14px;
+      box-shadow: 0 14px 40px rgba(17, 38, 62, 0.10);
+    }
+
+    .emailInput::placeholder {
+      color: rgba(24, 48, 81, 0.55);
+      font-weight: 300;
+    }
+
+    .sendBtn {
+      position: absolute;
+      right: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 100px;
+      height: 55px;
+      padding: 0;
+    }
+
+    .sendBtn img {
+      width: 30px;
+      height: 30px;
+      display: block;
+      right: 0;
+    }
+
+    /* FOOTER */
+    .icon-white {
+      color: white;
+    }
+
+    .footer {
+      padding: 18px 0 34px;
+      color: var(--footerText);
+    }
+
+    .footerTitle {
+      text-align: center;
+      font-weight: 300;
+      /* Light */
+      font-size: 21px;
+      /* ~16pt */
+      margin: 8px 0 18px;
+    }
+
+    .qaGrid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 18px;
+    }
+
+    .qaCol {
+      padding: 10px 6px;
+    }
+
+    .qaItem {
+      font-weight: 300;
+      /* Light */
+      font-style: italic;
+      /* Light Italic */
+      font-size: 17px;
+      /* ~13pt */
+      line-height: 1.45;
+      margin: 0 0 14px;
+      color: var(--footerText);
+    }
+
+    /* Responsive */
+    @media (max-width: 980px) {
+      .kicker {
+        font-size: 34px;
+      }
+
+      .sub {
+        font-size: 26px;
+      }
+
+      .coming {
+        font-size: 46px;
+      }
+
+      .notify {
+        font-size: 22px;
+      }
+
+      .qaGrid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 560px) {
+      .header {
+        padding-top: 10px;
+      }
+
+      .contact span {
+        display: none;
+      }
+
+      /* mobilde sadece ikon/pill kalsın */
+      .heroCard {
+        padding: 30px 16px;
+      }
+
+      .qaGrid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="bgimg">
+    <div class="container">
+      <!-- HEADER -->
+      <div class="header">
+        <div class="logo">
+          <img src="img/piyasal_logo.svg" alt="Piyasal Logo" width="413" height="70" />
+        </div>
+
+        <a class="contact" href="mailto:info@piyasal.com">
+          <div class="pill rounded">
+            <span>Bize Ulaşın</span>
+            <button class="btn rounded mailBtn" type="submit" aria-label="Gönder">
+              <img src="img/mail.svg" class="icon-white" alt="Mail" />
+            </button>
+          </div>
+        </a>
+      </div>
+    </div>
+
+    <!-- BODY -->
+    <div class="bodybg">
+      <div class="container">
+        <div class="body">
+          <div class="heroCard">
+            <h1 class="kicker">PİYASALARI TAKİP ETMENİN EN KOLAY YOLU</h1>
+            <p class="sub">Döviz, altın, kripto ve borsa tek ekranda.</p>
+            <p class="sub">Anlık, sade ve net.</p>
+            <div class="coming">YAKINDA</div>
+
+            <div style="height: 150px;"></div>
+
+            <div class="notify">Gelişmelerden haberdar olun:</div>
+
+            <form class="emailWrap" action="#" method="post">
+              <input class="emailInput rounded-md" type="email" name="email" placeholder="E-posta adresinizi girin"
+                autocomplete="email" />
+              <button class="btn rounded sendBtn" type="submit" aria-label="Gönder">
+                <img src="img/send.svg" width="33" height="35" alt="Gönder" />
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="container">
+    <div class="footer">
+      <div class="footerTitle">Sık Aranan Finans Soruları</div>
+
+      <div class="qaGrid">
+        <div class="qaCol">
+          <p class="qaItem">
+            Lorem ipsum dolor sit amet?<br />
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+          </p>
+          <p class="qaItem">
+            Lorem ipsum dolor sit amet?<br />
+            Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+          </p>
+        </div>
+
+        <div class="qaCol">
+          <p class="qaItem">
+            Lorem ipsum dolor sit amet?<br />
+            Ut enim ad minim veniam, quis nostrud exercitation ullamco.
+          </p>
+          <p class="qaItem">
+            Lorem ipsum dolor sit amet?<br />
+            Duis aute irure dolor in reprehenderit in voluptate velit esse.
+          </p>
+        </div>
+
+        <div class="qaCol">
+          <p class="qaItem">
+            Lorem ipsum dolor sit amet?<br />
+            Excepteur sint occaecat cupidatat non proident, sunt in culpa.
+          </p>
+          <p class="qaItem">
+            Lorem ipsum dolor sit amet?<br />
+            Mollit anim id est laborum. Curabitur blandit tempus porttitor.
+          </p>
+        </div>
+
+        <div class="qaCol">
+          <p class="qaItem">
+            Lorem ipsum dolor sit amet?<br />
+            Aenean lacinia bibendum nulla sed consectetur.
+          </p>
+          <p class="qaItem">
+            Lorem ipsum dolor sit amet?<br />
+            Integer posuere erat a ante venenatis dapibus posuere velit aliquet.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>
