@@ -287,6 +287,9 @@
         color: var(--text);
         font-size: 14px;
         box-shadow: 0 14px 40px rgba(17, 38, 62, 0.1);
+        transition:
+          border-color 180ms ease,
+          box-shadow 180ms ease;
       }
 
       .emailInput::placeholder {
@@ -309,6 +312,35 @@
         height: 30px;
         display: block;
         right: 0;
+      }
+
+      .sendBtn:disabled {
+        opacity: 0.7;
+        cursor: not-allowed;
+      }
+
+      .emailInput.inputError {
+        border-color: #d92d20;
+        box-shadow: 0 0 0 3px rgba(217, 45, 32, 0.15);
+      }
+
+      .emailInput.inputValid {
+        border-color: #12b76a;
+      }
+
+      .formMessage {
+        min-height: 20px;
+        margin: 10px 6px 0;
+        font-size: 13px;
+        text-align: left;
+      }
+
+      .formMessage--error {
+        color: #b42318;
+      }
+
+      .formMessage--success {
+        color: #067647;
       }
 
       /* FOOTER */
@@ -480,13 +512,22 @@
               <div class="notifyBlock">
                 <div class="notify">Gelişmelerden haberdar olun:</div>
 
-                <form class="emailWrap" action="#" method="post">
+                <form
+                  class="emailWrap"
+                  id="notifyForm"
+                  action="https://formspree.io/f/xaqpybkb"
+                  method="post"
+                  accept-charset="UTF-8"
+                >
                   <input
                     class="emailInput rounded-md"
                     type="email"
+                    id="notifyEmail"
                     name="email"
                     placeholder="E-posta adresinizi girin"
                     autocomplete="email"
+                    inputmode="email"
+                    required
                   />
                   <button
                     class="btn rounded sendBtn"
@@ -501,6 +542,7 @@
                     />
                   </button>
                 </form>
+                <p class="formMessage" id="formMessage" aria-live="polite"></p>
               </div>
             </div>
           </div>
@@ -657,5 +699,88 @@
         </div>
       </div>
     </div>
+
+    <script>
+      (function () {
+        const form = document.getElementById("notifyForm");
+        const emailInput = document.getElementById("notifyEmail");
+        const message = document.getElementById("formMessage");
+        const submitButton = form ? form.querySelector('button[type="submit"]') : null;
+
+        if (!form || !emailInput || !message || !submitButton) return;
+
+        const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+
+        function setMessage(text, type) {
+          message.textContent = text;
+          message.classList.remove("formMessage--error", "formMessage--success");
+          if (type === "error") message.classList.add("formMessage--error");
+          if (type === "success") message.classList.add("formMessage--success");
+        }
+
+        function validateEmailInput() {
+          const value = emailInput.value.trim();
+          const isValid = emailPattern.test(value);
+
+          emailInput.classList.remove("inputError", "inputValid");
+
+          if (!value) {
+            setMessage("", "");
+            return false;
+          }
+
+          if (!isValid) {
+            emailInput.classList.add("inputError");
+            setMessage("Lutfen gecerli bir e-posta adresi girin.", "error");
+            return false;
+          }
+
+          emailInput.classList.add("inputValid");
+          setMessage("", "");
+          return true;
+        }
+
+        emailInput.addEventListener("input", validateEmailInput);
+
+        form.addEventListener("submit", async function (event) {
+          event.preventDefault();
+
+          const isValid = validateEmailInput();
+          if (!isValid) return;
+
+          submitButton.disabled = true;
+          setMessage("Gonderiliyor...", "");
+
+          try {
+            const response = await fetch(form.action, {
+              method: "POST",
+              body: new FormData(form),
+              headers: { Accept: "application/json" },
+            });
+
+            if (response.ok) {
+              form.reset();
+              emailInput.classList.remove("inputValid", "inputError");
+              setMessage("Tesekkurler. E-posta adresiniz alindi.", "success");
+              return;
+            }
+
+            const data = await response.json().catch(() => ({}));
+            const apiError =
+              data && data.errors && data.errors.length
+                ? data.errors.map((item) => item.message).join(" ")
+                : "Form gonderilemedi. Lutfen tekrar deneyin.";
+            setMessage(apiError, "error");
+          } catch (error) {
+            setMessage(
+              "Baglanti hatasi olustu. Lutfen internetinizi kontrol edip tekrar deneyin.",
+              "error",
+            );
+          } finally {
+            submitButton.disabled = false;
+          }
+        });
+      })();
+    </script>
   </body>
 </html>
